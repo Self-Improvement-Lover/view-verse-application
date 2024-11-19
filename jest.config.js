@@ -1,16 +1,15 @@
-// maybe should delete this and just export default normal object
-
 import { config } from 'dotenv';
-config(); // Load environment variables
+config(); 
 
 export default {
- transform: {
-    "^.+\\.[t|j]sx?$": "babel-jest",
+  transform: {
+    '^.+\\.[t|j]sx?$': 'babel-jest',
+    '^.+\\.css$': 'jest-transform-stub',
   },
   moduleNameMapper: {
-    "^@/(.*)$": "<rootDir>/src/$1",
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
- preset: 'ts-jest/presets/js-with-ts-esm', // Use ESM-compatible preset
-  setupFiles: ['<rootDir>/setupTests.js'], // Your setup file for environment variables
-  testEnvironment: 'jest-environment-jsdom', // or 'jsdom', depending on your requirements
+  preset: 'ts-jest/presets/js-with-ts-esm',
+  setupFiles: ['<rootDir>/setupTests.js'], 
+  testEnvironment: 'jest-environment-jsdom', 
 };

@@ -1,21 +1,17 @@
 export abstract class StreamingContentMetadataProvider {
-  abstract getStreamingContentMetadata(
-    text: string,
-  ): Promise<StreamingContentMetadata[]>;
+  abstract searchMoviesAndShows(text: string): Promise<MoviesAndShows[]>;
+  abstract getTrendingStreamingContentMetadata(): Promise<MoviesAndShows[]>;
+  abstract getPopularStreamingContentMetadata(): Promise<MoviesAndShows[]>;
+  abstract getStreamingContentMetadataByGenre(text: string): Promise<MoviesAndShows[]>;
 }
 
-export interface StreamingContentMetadata {
+export interface MoviesAndShows {
   coverImage: string;
   title: string;
   description: string;
   releaseDate: string;
   genreIds: number[];
+  popularity: number;
   rating: number;
   mediaType: string;
 }
-/*
-i have genre ids, but not their name. need to convert them into their name. i should do this with a funciton 
-and it should be in the tmdb api file since this would be spefici to it. 
-
-
-*/
