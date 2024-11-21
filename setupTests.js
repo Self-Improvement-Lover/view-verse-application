@@ -1,7 +1,3 @@
-// setupTests.js
 import dotenv from 'dotenv';
-import 'whatwg-fetch'; // Polyfill for fetch
-
+import 'whatwg-fetch'; 
 dotenv.config();
-// setupTests.js
-
