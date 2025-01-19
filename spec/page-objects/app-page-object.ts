@@ -1,4 +1,4 @@
-import { queryAllByTestId, queryByTestId } from '@testing-library/react';
+import { act, fireEvent, queryAllByTestId, queryByTestId } from '@testing-library/react';
 import { AppTestIds } from '../../src/App';
 import { HomeTestIds, TrendingTestIds } from '../../src/components/home';
 
@@ -14,7 +14,13 @@ export class HomePageObject {
   constructor(private element: HTMLElement) {}
 
   get trending() {
-    return new TrendingStreamingContentPageObject(queryByTestId(this.element, HomeTestIds.trendingCategory) as HTMLElement);
+    return new CarouselPageObject(
+      this.element,
+      queryByTestId(this.element, TrendingTestIds.trendingCarouselLeftButton) as HTMLButtonElement,
+      queryByTestId(this.element, TrendingTestIds.trendingCarouselRightButton) as HTMLButtonElement,
+    );
+
+    // TrendingStreamingContentPageObject(queryByTestId(this.element, HomeTestIds.trendingCategory) as HTMLElement);
   }
 }
 // Get the trending section, then get each trending movie or show, and for each give them their
@@ -39,7 +45,7 @@ export class TrendingStreamingContentMetadataPageObject {
   get title() {
     return new ElementPageObject(queryByTestId(this.element, TrendingTestIds.trendingContentTitle) as HTMLElement);
   }
-  
+
   get rating() {
     return new ElementPageObject(queryByTestId(this.element, TrendingTestIds.trendingContentRating) as HTMLElement);
   }
@@ -61,5 +67,44 @@ export class ImagePageObject {
 
   get src() {
     return this.element.src;
+  }
+}
+
+export class CarouselPageObject {
+  constructor(
+    private element: HTMLElement,
+    private carouselLeftButton: HTMLButtonElement,
+    private carouselRightButton: HTMLButtonElement,
+  ) {}
+
+  get content() {
+    return new TrendingStreamingContentPageObject(queryByTestId(this.element, HomeTestIds.trendingCategory) as HTMLElement);
+  }
+
+  get scrollPosition() {
+    return this.element.scrollLeft;
+  }
+
+  get scrollLeftButton() {
+    console.log(this.element);
+    return new ButtonPageObject(this.carouselLeftButton);
+  }
+  get scrollRightButton() {
+    return new ButtonPageObject(this.carouselRightButton);
+  }
+}
+
+export class ButtonPageObject {
+  constructor(
+    private element: HTMLButtonElement,
+  ) {}
+
+  click() {
+    console.log(this.element)
+    fireEvent.click(this.element);
+  }
+
+  get isDisabled() {
+    return this.element.disabled;
   }
 }
