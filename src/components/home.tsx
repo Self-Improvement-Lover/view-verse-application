@@ -26,32 +26,29 @@ export function Home({ streamingContentMetadataProvider }: HomeProps) {
   }, []);
 
   function checkScrollButtons() {
-
-
     if (carouselRef.current) {
-      const currentScrollPosition = carouselRef.current.scrollLeft; 
-      const possibleMaxScrollAmount = carouselRef.current.scrollWidth - carouselRef.current.clientWidth; 
-      setIsScrollLeftButtonDisabled(currentScrollPosition === 0); 
-      setIsScrollRightButtonDisabled(currentScrollPosition >= possibleMaxScrollAmount); 
+      const currentScrollPosition = carouselRef.current.scrollLeft;
+      const possibleMaxScrollAmount = carouselRef.current.scrollWidth - carouselRef.current.clientWidth;
+      setIsScrollLeftButtonDisabled(currentScrollPosition === 0);
+      setIsScrollRightButtonDisabled(currentScrollPosition >= possibleMaxScrollAmount);
     }
-
   }
 
   useEffect(() => {
     console.log('isScrollLeftButtonDisabled:', isScrollLeftButtonDisabled);
-  }, [isScrollLeftButtonDisabled]); 
+  }, [isScrollLeftButtonDisabled]);
 
   useEffect(() => {
     console.log('isScrollRightButtonDisabled:', isScrollRightButtonDisabled);
-  }, [isScrollRightButtonDisabled]); 
-  
+  }, [isScrollRightButtonDisabled]);
+
   async function handleScroll(direction: 'left' | 'right') {
-    
     if (carouselRef.current) {
       console.log(carouselRef.current.scrollLeft);
       const scrollAmount = direction === 'left' ? -600 : 600;
+      console.log(direction);
       carouselRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
-  
+
       // use setTimeout to wait for the smooth effect to finish first and then update scrollButtons
       await new Promise((r) => setTimeout(r, 500));
 

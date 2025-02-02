@@ -1,4 +1,4 @@
-import { act, fireEvent, queryAllByTestId, queryByTestId } from '@testing-library/react';
+import { fireEvent, queryAllByTestId, queryByTestId } from '@testing-library/react';
 import { AppTestIds } from '../../src/App';
 import { HomeTestIds, TrendingTestIds } from '../../src/components/home';
 
@@ -14,12 +14,12 @@ export class HomePageObject {
   constructor(private element: HTMLElement) {}
 
   get trending() {
+    console.log(queryByTestId(this.element, TrendingTestIds.trendingCarouselLeftButton) as HTMLButtonElement);
     return new CarouselPageObject(
       this.element,
       queryByTestId(this.element, TrendingTestIds.trendingCarouselLeftButton) as HTMLButtonElement,
       queryByTestId(this.element, TrendingTestIds.trendingCarouselRightButton) as HTMLButtonElement,
     );
-
     // TrendingStreamingContentPageObject(queryByTestId(this.element, HomeTestIds.trendingCategory) as HTMLElement);
   }
 }
@@ -86,21 +86,21 @@ export class CarouselPageObject {
   }
 
   get scrollLeftButton() {
-    console.log(this.element);
+    console.log(this.carouselLeftButton);
     return new ButtonPageObject(this.carouselLeftButton);
   }
   get scrollRightButton() {
+    console.log(this.element);
     return new ButtonPageObject(this.carouselRightButton);
   }
 }
 
 export class ButtonPageObject {
-  constructor(
-    private element: HTMLButtonElement,
-  ) {}
+  constructor(private element: HTMLButtonElement) {}
 
   click() {
-    console.log(this.element)
+    console.log(this.element);
+    console.log(this.element);
     fireEvent.click(this.element);
   }
 
@@ -108,3 +108,8 @@ export class ButtonPageObject {
     return this.element.disabled;
   }
 }
+
+/**
+ get this left button working. finsih setting up the rest of the tests
+ loasds the rest of the themes and yeah, make it look good
+ */

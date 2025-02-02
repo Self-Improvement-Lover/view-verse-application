@@ -2,16 +2,17 @@
   "compilerOptions": {
     "target": "ES2020",
     "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "lib": ["ES2020", "DOM", "DOM.Iterable", "dom"],
     "module": "ESNext",
+    "outDir": "./dist", // Ensure output directory is set
+    "rootDir": "./",
     "skipLibCheck": true,
 
-    /* Bundler mode */
-    "moduleResolution": "bundler",
-    "allowImportingTsExtensions": true,
+    /* Node.js-compatible resolution */
+    "moduleResolution": "node",
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
+    "noEmit": false, // Allow emitting files for testing
     "jsx": "react-jsx",
 
     /* Linting */
@@ -20,5 +21,6 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["./src", "./spec", "spec/page-objects", "src/utils"]
+  "include": ["./src", "spec", "spec/page-objects", "src/utils", "spec/support", "spec", "spec/support"],
+  "exclude": ["node_modules", "dist"] // Avoid re-compiling node_modules and dist
 }
