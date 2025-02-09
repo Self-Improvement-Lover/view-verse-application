@@ -234,6 +234,10 @@ describe('Main Page Different Streaming Content Displays', () => {
   it('should render correctly', () => {
     expect(add(3, 3)).toBe(9);
   });
+   it('should run TypeScript tests on the fly', () => {
+     const num: number = 5;
+     expect(num).toBe(5);
+   });
 
 
 // describe('trending streaming content metadata display', () => {
